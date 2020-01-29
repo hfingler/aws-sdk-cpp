@@ -4,12 +4,13 @@ set (CMAKE_CXX_STANDARD 11)
 
 #hardcode this to aws-cpp-sdk
 set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_INSTALL_PREFIX /musl)
 
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio")
-message("****adding ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../boost/ ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio ../boost  /aws-sdk-cpp/boost)
+message("****adding ${CMAKE_CURRENT_SOURCE_DIR}/../boost/ ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio ../boost  /aws-sdk-cpp/boost")
 
 # This builds the binary for experimenting
 set(EXAMPLES "")
