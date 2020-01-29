@@ -9,16 +9,16 @@ set(CMAKE_INSTALL_PREFIX /musl)
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../boost/ ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio ../boost  /aws-sdk-cpp/boost)
-message("****adding ${CMAKE_CURRENT_SOURCE_DIR}/../boost/ ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio ../boost  /aws-sdk-cpp/boost")
+include_directories("/aws-sdk-cpp/boost")
+message("****adding ${CMAKE_CURRENT_SOURCE_DIR} /aws-sdk-cpp/boost")
 
 # This builds the binary for experimenting
-set(EXAMPLES "")
-list(APPEND EXAMPLES "s3test")
-foreach(EXAMPLE IN LISTS EXAMPLES)
-  add_executable(${EXAMPLE} ${EXAMPLE}.cpp)
-  target_link_libraries(${EXAMPLE} ${AWSSDK_LINK_LIBRARIES})
-endforeach()
+#set(EXAMPLES "")
+#list(APPEND EXAMPLES "s3test")
+#foreach(EXAMPLE IN LISTS EXAMPLES)
+#  add_executable(${EXAMPLE} ${EXAMPLE}.cpp)
+#  target_link_libraries(${EXAMPLE} ${AWSSDK_LINK_LIBRARIES})
+#endforeach()
 
 
 # This builds the static library
