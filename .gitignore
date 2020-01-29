@@ -81,3 +81,5 @@ aws-cpp-sdk-core/include/aws/core/SDKConfig.h
 
 #nuget
 *.nupkg
+
+sdkbuild
