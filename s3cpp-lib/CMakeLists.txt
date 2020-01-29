@@ -3,7 +3,6 @@ project(s3cpp)
 set (CMAKE_CXX_STANDARD 11)
 
 #hardcode this to aws-cpp-sdk
-#set(CMAKE_PREFIX_PATH "../sdkbuild")
 set(BUILD_SHARED_LIBS OFF)
 
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
