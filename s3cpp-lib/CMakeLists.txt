@@ -29,4 +29,6 @@ if(Boost_FOUND)
   )
   target_link_libraries(s3cpp ${AWSSDK_LINK_LIBRARIES})
 
+  install(TARGETS s3cpp DESTINATION /musl)
+
 endif()
