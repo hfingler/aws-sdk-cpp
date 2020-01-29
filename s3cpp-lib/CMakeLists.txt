@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 project(s3cpp)
 set (CMAKE_CXX_STANDARD 11)
 
-set(BUILD_SHARED_LIBS OFF)
-set(CMAKE_INSTALL_PREFIX /musl)
-set(CMAKE_PREFIX_PATH /musl)
-
 #set(AWSSDK_ROOT_DIR, "/musl")
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
