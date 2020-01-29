@@ -1,0 +1,3 @@
+Run these:
+	mkdir -p sdkbuild && cd sdkbuild && sudo cmake -D BUILD_ONLY="s3;transfer" -DCMAKE_INSTALL_PREFIX=/usr/local  -DBUILD_SHARED_LIBS=OFF  ../aws-cpp-sdk && sudo make install
+	cd .. && mkdir s3cpp-build && cmake ../s3cpp-lib  && make
