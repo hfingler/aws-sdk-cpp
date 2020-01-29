@@ -8,8 +8,8 @@ set(BUILD_SHARED_LIBS OFF)
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../asio-boost")
-message("****adding ${CMAKE_CURRENT_SOURCE_DIR}/../asio-boost")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio")
+message("****adding ${CMAKE_CURRENT_SOURCE_DIR}/../boost/asio")
 
 # This builds the binary for experimenting
 set(EXAMPLES "")
