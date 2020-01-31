@@ -12,3 +12,4 @@ s3cppclean:
 
 clean: s3cppclean
 	rm -rf sdkbuild
+	
