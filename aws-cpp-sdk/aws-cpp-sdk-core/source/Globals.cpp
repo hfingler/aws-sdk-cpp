@@ -16,7 +16,7 @@
 #include <aws/core/utils/EnumParseOverflowContainer.h>
 #include <aws/core/utils/memory/AWSMemory.h>
 
-void* __dso_handle = nullptr;
+//void* __dso_handle = nullptr;
 namespace Aws
 {
     static const char TAG[] = "GlobalEnumOverflowContainer";

@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 project(s3cpp)
 set (CMAKE_CXX_STANDARD 11)
 
-#set(AWSSDK_ROOT_DIR, "/musl")
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
 
@@ -27,6 +26,6 @@ if(Boost_FOUND)
   )
   target_link_libraries(s3cpp ${AWSSDK_LINK_LIBRARIES})
 
-  install(TARGETS s3cpp DESTINATION /musl)
+  install(TARGETS s3cpp)
 
 endif()
