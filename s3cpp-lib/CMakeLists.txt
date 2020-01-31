@@ -9,8 +9,6 @@ find_package(Boost)
 if(Boost_FOUND)   
   include_directories(${Boost_INCLUDE_DIR})
 
-  #include_directories("/aws-sdk-cpp/s3cpp-lib/boost")
-
   # This builds the binary for experimenting
   #set(EXAMPLES "")
   #list(APPEND EXAMPLES "s3test")
@@ -19,13 +17,12 @@ if(Boost_FOUND)
   #  target_link_libraries(${EXAMPLE} ${AWSSDK_LINK_LIBRARIES})
   #endforeach()
 
-
   # This builds the static library
-  add_library(s3cpp STATIC
+  add_library(s3cpp SHARED
     s3cpp_interface.cpp
   )
   target_link_libraries(s3cpp ${AWSSDK_LINK_LIBRARIES})
 
-  install(TARGETS s3cpp)
+  install(TARGETS s3cpp DESTINATION lib)
 
 endif()

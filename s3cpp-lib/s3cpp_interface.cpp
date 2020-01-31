@@ -16,7 +16,7 @@ using namespace Aws::Transfer;
 using namespace Aws::Utils;
 
 extern "C" void  s3cpp_upload(char* buf, uint32_t len, char* bucket, char* key);
-extern "C" char* s3cpp_download(char* bucket, char* key);
+extern "C" char* s3cpp_download(char* bucket, char* key, uint32_t* len);
 extern "C" void  hello_world(char* x);
 
 class StreamBuf : public Aws::IOStream
@@ -36,7 +36,7 @@ void hello_world(char* x) {
     printf("Hello, World! %s\n", x);
 }
 
-/*
+
 static bool inited = false;
 static std::shared_ptr<Aws::Transfer::TransferManager> transferManager;
 
@@ -64,33 +64,9 @@ void init_s3c() {
 
     transferManager = Aws::Transfer::TransferManager::Create(transferConfig);
 }
-*/
+
 
 void s3cpp_upload(char* buf, uint32_t len, char* bucket, char* key) {
-
-
-    Aws::SDKOptions options;
-    Aws::InitAPI(options);
-
-    ClientConfiguration config;
-    config.region = "us-east-1";
-    config.connectTimeoutMs = 3000;
-    config.requestTimeoutMs = 60000;
-    config.executor = Aws::MakeShared<Aws::Utils::Threading::PooledThreadExecutor>("USETL", 2);
-    auto s3Client = Aws::MakeShared<S3Client>("USETL", config);
-
-    auto sdk_client_executor = Aws::MakeShared<Aws::Utils::Threading::PooledThreadExecutor>("USETL", 4);
-    TransferManagerConfiguration transferConfig(sdk_client_executor.get());
-    transferConfig.s3Client = s3Client;
-
-    transferConfig.uploadProgressCallback =
-        [](const Aws::Transfer::TransferManager*, const std::shared_ptr<const Aws::Transfer::TransferHandle>&transferHandle)
-    { std::cout << "Upload Progress: " << transferHandle->GetBytesTransferred() << " of " << transferHandle->GetBytesTotalSize() << " bytes\n"; };
-
-    static std::shared_ptr<Aws::Transfer::TransferManager>transferManager = Aws::Transfer::TransferManager::Create(transferConfig);
-
-
-
 
     auto data = Aws::MakeShared<Aws::StringStream>("USETL", std::stringstream::in | std::stringstream::out | std::stringstream::binary);
     //this copy is avoidable but requires a lot of effort (reimplement a istream_basic)
@@ -116,31 +92,9 @@ void s3cpp_upload(char* buf, uint32_t len, char* bucket, char* key) {
     std::cout << res.c_str() << std::endl;
 }
 
-char* s3cpp_download(char* bucket, char* key)
+char* s3cpp_download(char* bucket, char* key, uint32_t* len)
 {
-    Aws::SDKOptions options;
-    Aws::InitAPI(options);
-
-    ClientConfiguration config;
-    config.region = "us-east-1";
-    config.connectTimeoutMs = 3000;
-    config.requestTimeoutMs = 60000;
-    config.executor = Aws::MakeShared<Aws::Utils::Threading::PooledThreadExecutor>("USETL", 2);
-    auto s3Client = Aws::MakeShared<S3Client>("USETL", config);
-
-    auto sdk_client_executor = Aws::MakeShared<Aws::Utils::Threading::PooledThreadExecutor>("USETL", 4);
-    TransferManagerConfiguration transferConfig(sdk_client_executor.get());
-    transferConfig.s3Client = s3Client;
-
-    transferConfig.uploadProgressCallback =
-        [](const Aws::Transfer::TransferManager*, const std::shared_ptr<const Aws::Transfer::TransferHandle>&transferHandle)
-    { std::cout << "Upload Progress: " << transferHandle->GetBytesTransferred() << " of " << transferHandle->GetBytesTotalSize() << " bytes\n"; };
-
-    static std::shared_ptr<Aws::Transfer::TransferManager>transferManager = Aws::Transfer::TransferManager::Create(transferConfig);
-
-
-
-
+    /*
     boost::asio::streambuf b;
     auto creationFunction = [&](){ return Aws::New< StreamBuf >( "DownloadTag", &b); };
 
@@ -155,5 +109,12 @@ char* s3cpp_download(char* bucket, char* key)
         dhandle->WaitUntilFinished();
     }
 
+    *len = dhandle->GetBytesTotalSize();
+
     std::cout << "downloaded: " << dhandle->GetBytesTotalSize() << std::endl;
+*/
+
+    char* x = (char*) malloc(16);
+    *len = 16;
+    return x;
 }
