@@ -10,7 +10,7 @@ add_definitions(-DUSE_IMPORT_EXPORT)
 #if(Boost_FOUND)   
   #include_directories(${Boost_INCLUDE_DIR})
 
-  include_directories("/aws-sdk-cpp/boost")
+  include_directories("/aws-sdk-cpp/s3cpp-lib/boost")
 
   # This builds the binary for experimenting
   #set(EXAMPLES "")
