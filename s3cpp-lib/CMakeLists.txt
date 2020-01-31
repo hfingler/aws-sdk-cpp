@@ -6,11 +6,11 @@ set (CMAKE_CXX_STANDARD 11)
 find_package(AWSSDK REQUIRED COMPONENTS transfer s3)
 add_definitions(-DUSE_IMPORT_EXPORT)
 
-#find_package(Boost)
-#if(Boost_FOUND)   
-  #include_directories(${Boost_INCLUDE_DIR})
+find_package(Boost)
+if(Boost_FOUND)   
+  include_directories(${Boost_INCLUDE_DIR})
 
-  include_directories("/aws-sdk-cpp/s3cpp-lib/boost")
+  #include_directories("/aws-sdk-cpp/s3cpp-lib/boost")
 
   # This builds the binary for experimenting
   #set(EXAMPLES "")
@@ -29,4 +29,4 @@ add_definitions(-DUSE_IMPORT_EXPORT)
 
   install(TARGETS s3cpp DESTINATION /musl)
 
-#endif()
+endif()
